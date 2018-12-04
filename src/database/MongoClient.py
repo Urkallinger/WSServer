@@ -12,8 +12,11 @@ class MongoClient:
         self.db = self.client["TestDB"]
         self.users = self.db["users"]
     
-    def getUsers(self):
-        return self.users.find()
+    def getUsers(self) -> list:
+        """
+        Returns a list containing all users.
+        """
+        return list(self.users.find())
     
     def addUser(self):
         mylist = [{ "_id": 1, "name": "John", "address": "Highway 37"},
@@ -39,7 +42,5 @@ class MongoClient:
 
 if __name__ == "__main__":
     client = MongoClient()
-    client.addUser()
-    for doc in client.getUsers():
-        print(doc)
-    client.deleteAllUsers()
+    users = list(client.getUsers())
+    print(users[0]['name'])
