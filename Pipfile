@@ -9,6 +9,7 @@ rope = "*"
 
 [packages]
 flask-socketio = "*"
+pymongo = "==3.4.0"
 
 [requires]
 python_version = "3.7"
