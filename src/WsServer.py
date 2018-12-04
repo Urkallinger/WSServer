@@ -9,15 +9,15 @@ class WsServer:
     def __init__(self):
         self.app = Flask(__name__)
         self.app.config['SECRET_KEY'] = 'secret!'
-        self.socketio = SocketIO(self.app)
+        self.socketIO = SocketIO(self.app)
 
-        self.socketio.on_event('broadcast', self.handleBroadcast)
+        self.socketIO.on_event('broadcast', self.handleBroadcast)
 
     def run(self):
         """
         Starts the websocket server.
         """
-        self.socketio.run(self.app)
+        self.socketIO.run(self.app)
 
     def handleBroadcast(self, msg):
         """
