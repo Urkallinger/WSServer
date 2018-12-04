@@ -20,13 +20,27 @@
           $("#messages").append("<li>" + msg + "</li>");
         });
 
+        socket.on("getUsers", function(data) {
+          data = JSON.parse(data);
+          console.log(data);
+          data.forEach(function(user) {
+            $("#messages").append(`<li>${user.name}</li>`);
+          });
+        });
+
         $("#btnSend").on("click", function() {
           socket.emit("broadcast", $("#txtMessage").val());
           $("#txtMessage").val("");
+        });
+
+        $("#btnUsers").on("click", function() {
+          socket.emit("getUsers");
+          $("#messages").empty();
         });
       });
     </script>
     <ul id="messages"></ul>
     <input type="text" id="txtMessage" /> <button id="btnSend">send</button>
+    <button id="btnUsers">show Users</button>
   </body>
 </html>
