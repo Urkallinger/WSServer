@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, emit
 
 
 class WsServer:
@@ -23,7 +23,8 @@ class WsServer:
         """
         Sends the given message to all connected clients.
         """
-        send(msg, broadcast=True)
+        print('broadcast: {}'.format(msg))
+        emit('broadcast', msg, broadcast=True)
 
 
 if __name__ == '__main__':

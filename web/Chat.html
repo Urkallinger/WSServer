@@ -13,15 +13,15 @@
         var socket = io.connect("http://127.0.0.1:5000");
 
         socket.on("connect", function() {
-          socket.send("User has connected");
+          socket.emit("broadcast", "User has connected");
         });
 
-        socket.on("message", function(msg) {
+        socket.on("broadcast", function(msg) {
           $("#messages").append("<li>" + msg + "</li>");
         });
 
         $("#btnSend").on("click", function() {
-          socket.send($("#txtMessage").val());
+          socket.emit("broadcast", $("#txtMessage").val());
           $("#txtMessage").val("");
         });
       });
